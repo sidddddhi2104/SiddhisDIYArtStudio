@@ -6,18 +6,39 @@
 
     <title>Contact Us</title>
 
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
 <!-- BACK HOME BUTTON -->
+<nav class="navbar">
 
-<a href="/"
-   class="home-back-btn">
+    <div class="logo">
+        Sivika Studio
+    </div>
 
-    Home
+    <div class="nav-icons">
 
-</a>
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span class="wishlist-count">0</span>
+        </a>
+
+        <a href="/cart" class="nav-icon-btn cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </a>
+
+    </div>
+
+</nav>
 
 
 <section class="section-padding">

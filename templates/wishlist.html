@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Wishlist | Sidkara Studio</title>
+    <title>Wishlist | Sivika Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -22,18 +22,22 @@
 <nav class="navbar">
 
     <div class="logo">
-        Sidkara Studio
+        Sivika Studio
     </div>
 
-    <ul class="nav-links">
+    <div class="nav-icons">
 
-        <li><a href="/">Home</a></li>
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
 
-        <li><a href="/products">Products</a></li>
 
-        <li><a href="/cart">Cart</a></li>
+        <a href="/cart" class="nav-icon-btn cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </a>
 
-    </ul>
+    </div>
 
 </nav>
 
@@ -144,6 +148,25 @@ function renderWishlist(){
                     </span>
 
                 </div>
+
+<button
+    onclick="addWishlistItemToCart(${index})"
+    style="
+        width:100%;
+        margin-top:20px;
+        padding:12px;
+        border:none;
+        border-radius:30px;
+        background:linear-gradient(135deg,#d98bb4,#b76e99);
+        color:white;
+        font-weight:600;
+        cursor:pointer;
+        transition:.3s;
+    ">
+
+    🛒 Add To Cart
+
+</button>
 
                 <button
                     onclick="removeWishlist(${index})"

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | Sivika Art Studio</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .success-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px 40px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .success-wrapper h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #4a2e3a;
+            margin-bottom: 10px;
+        }
+
+        .success-wrapper p.sub {
+            font-family: 'Poppins', sans-serif;
+            color: #777;
+            margin-bottom: 35px;
+        }
+
+        .order-detail-card {
+            text-align: left;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid #e8d5dd;
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin-bottom: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #555;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e3c3d0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-row span:first-child {
+            color: #8a8a8a;
+        }
+
+        .detail-row span:last-child {
+            font-weight: 600;
+            color: #4a2e3a;
+        }
+
+        .shipping-highlight {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #fdf2f6;
+            border: 1px solid #e8b9cd;
+            border-radius: 14px;
+            padding: 18px 24px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .shipping-highlight i {
+            font-size: 26px;
+            color: #cf8fad;
+        }
+
+        .shipping-highlight .label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .shipping-highlight .date {
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: #4a2e3a;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btns a {
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 14px 26px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            background: #cf8fad;
+            color: #fff;
+        }
+
+        .btn-home {
+            background: transparent;
+            border: 1px solid #cf8fad;
+            color: #cf8fad;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo">Sivika Studio</div>
+    <div class="nav-icons">
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
+    </div>
+</nav>
+
+<section class="section-padding">
+    <div class="glass-card success-wrapper">
+
+        <i class="fa-solid fa-circle-check success-icon"></i>
+        <h2>Order Confirmed!</h2>
+        <p class="sub">Thank you, {{ order.fullname }}. Your handmade order is being prepared with love.</p>
+
+        <div class="order-detail-card">
+            <div class="detail-row">
+                <span>Order ID</span>
+                <span>{{ order.order_id }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Order Date</span>
+                <span>{{ order.order_date }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Name</span>
+                <span>{{ order.fullname }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Phone</span>
+                <span>{{ order.phone }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Delivery Address</span>
+                <span>{{ order.address }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Amount Paid</span>
+                <span>₹{{ order.total }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Payment ID</span>
+                <span>{{ order.payment_id }}</span>
+            </div>
+        </div>
+
+        <div class="shipping-highlight">
+            <i class="fa-solid fa-truck-fast"></i>
+            <div>
+                <div class="label">Expected Shipping Date</div>
+                <div class="date">{{ order.shipping_date }}</div>
+            </div>
+        </div>
+
+        <div class="action-btns">
+            <a href="{{ url_for('download_invoice', order_id=order.order_id) }}" class="btn-download">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Invoice
+            </a>
+            <a href="/" class="btn-home">
+                <i class="fa-solid fa-house"></i> Back to Home
+            </a>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

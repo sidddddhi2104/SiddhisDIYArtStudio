@@ -1,49 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
 
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Sivika Art Studio</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
-<body>
 
-<!-- BACK HOME BUTTON -->
+<body class="auth-body">
 
-<a href="/"
-   class="home-back-btn">
+    <!-- HOME BUTTON -->
 
-    Home
+    <a href="/"
+       class="home-back-btn">
+        Home
+    </a>
 
-</a>
+    <section class="section-padding">
 
+        <div class="glass-card"
+             style="max-width:500px; margin:auto; padding:50px;">
 
-<section class="section-padding">
+            <h2 style="text-align:center; margin-bottom:30px;">
+                Welcome Back
+            </h2>
 
-    <div class="glass-card" style="max-width:500px; margin:auto; padding:50px;">
+            <form method="POST"
+                  action="/login"
+                  autocomplete="off">
 
-        <h2 style="text-align:center; margin-bottom:30px;">Welcome Back</h2>
+                <!-- Email -->
 
-        <form method="POST">
+                <div class="input-group">
 
-		<input type="text" name="email" placeholder="Enter Email or Admin Username" required class="input-field">
-            <input type="password" name="password" placeholder="Enter Password" required class="input-field">
+                    <i class="fas fa-envelope"></i>
 
-            <button type="submit" class="primary-btn" style="width:100%; border:none;">
-                Login
-            </button>
+                   <input
+    type="text"
+    name="email"
+    placeholder="Enter Email"
+    autocomplete="username"
+    required>
 
-        </form>
+                </div>
 
-        <p style="margin-top:20px; text-align:center;">
-            Don't have an account?
-            <a href="/register">Register</a>
-        </p>
+                <!-- Password -->
 
-    </div>
+                <div class="input-group password-group">
 
-</section>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+                    <i class="fas fa-lock"></i>
+
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           placeholder="Password"
+                           autocomplete="current-password"
+                           required>
+
+                   
+
+                </div>
+
+                <button type="submit"
+                        class="primary-btn"
+                        style="width:100%; border:none;">
+
+                    Login
+
+                </button>
+
+            </form>
+
+            <p style="margin-top:20px; text-align:center;">
+
+                Don't have an account?
+
+                <a href="/register">
+
+                    Register
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <script>
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                this.classList.remove("fa-eye");
+                this.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+                this.classList.remove("fa-eye-slash");
+                this.classList.add("fa-eye");
+
+            }
+
+        });
+    </script>
+
 </body>
+
 </html>

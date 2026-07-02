@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Register | Siddhi's DIY Art Studio</title>
+    <title>Register | Sivika Art Studio</title>
 
     <!-- CSS -->
 
@@ -59,12 +59,13 @@
                 <h1>Create Account</h1>
 
                 <p>
-                    Join Siddhi's DIY Art Studio
+                    Join Sivika Art Studio
                     and explore luxurious handmade creations.
                 </p>
 
-                <form method="POST"
-                      action="/register">
+               <form method="POST"
+      action="/register"
+      autocomplete="off">
 
                     <div class="input-group">
 
@@ -73,6 +74,7 @@
                         <input type="text"
                                name="name"
                                placeholder="Full Name"
+                                autocomplete="off"
                                required>
 
                     </div>
@@ -84,20 +86,25 @@
                         <input type="email"
                                name="email"
                                placeholder="Email Address"
+                                autocomplete="off"
                                required>
 
                     </div>
 
-                    <div class="input-group">
+                   <div class="input-group password-group">
 
-                        <i class="fas fa-lock"></i>
+    <i class="fas fa-lock"></i>
 
-                        <input type="password"
-                               name="password"
-                               placeholder="Password"
-                               required>
+    <input type="password"
+           id="password"
+           name="password"
+           placeholder="Password"
+           autocomplete="new-password"
+           required>
 
-                    </div>
+    
+
+</div>
 
                     <button type="submit"
                             class="auth-btn">

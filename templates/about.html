@@ -8,23 +8,45 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>About Us | Sidkara Studio</title>
+    <title>About Us | Sivika Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
 <body>
 
-<!-- BACK HOME BUTTON -->
+<!-- ================= NAVBAR ================= -->
 
-<a href="/"
-   class="home-back-btn">
+<nav class="navbar">
 
-    Home
+    <div class="logo">
+        Sivika Studio
+    </div>
 
-</a>
+    <div class="nav-icons">
+
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span class="wishlist-count">0</span>
+        </a>
+
+        <a href="/cart" class="nav-icon-btn cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </a>
+
+    </div>
+
+</nav>
 
 <!-- ABOUT SECTION -->
 
@@ -48,7 +70,7 @@
 
             <img src="{{ url_for('static',
             filename='images/hero.jpg') }}"
-                 alt="Sidkara Studio">
+                 alt="Sivika Studio">
 
         </div>
 
@@ -66,7 +88,7 @@
 
             <p>
 
-                Sidkara Studio is a premium handmade art brand
+                Sivika Studio is a premium handmade art brand
                 born from a deep love for creativity,
                 elegance and artistic storytelling.
 

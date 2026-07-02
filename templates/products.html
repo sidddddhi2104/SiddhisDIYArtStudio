@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Products | Sidkara Studio</title>
+    <title>Products | Sivika Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -22,7 +22,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
-
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -32,18 +33,26 @@
 <nav class="navbar">
 
     <div class="logo">
-        Sidkara Studio
+        Sivika Studio
     </div>
 
-    <ul class="nav-links">
+    <div class="nav-icons">
 
-        <li><a href="/">Home</a></li>
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
 
-        <li><a href="/wishlist">Wishlist</a></li>
+        <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span class="wishlist-count">0</span>
+        </a>
 
-        <li><a href="/cart">Cart</a></li>
+        <a href="/cart" class="nav-icon-btn cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </a>
 
-            </ul>
+    </div>
 
 </nav>
 
@@ -113,209 +122,55 @@
     </div>
 
     <!-- PRODUCT GRID -->
-
     <div class="product-grid">
 
-        <!-- PRODUCT 1 -->
+{% for product in products %}
 
-        <div class="product-card"
-             data-category="candles">
+<div class="product-card"
+     data-category="{{ product[2]|lower }}">
 
-            <img src="{{ url_for('static', filename='images/candle.jpg') }}">
+    <img src="{{ url_for('static',
+    filename='images/' + product[5]) }}">
 
-            <div class="product-info">
+    <div class="product-info">
 
-                <span class="product-category">
-                    Scented Candle
-                </span>
+        <span class="product-category">
+            {{ product[2] }}
+        </span>
 
-                <h3>
-                    Lavender Bliss Candle
-                </h3>
+        <h3>
+            {{ product[1] }}
+        </h3>
 
-                <p>
-                    Relaxing handmade soy candle with premium floral fragrance.
-                </p>
+        <p>
+            {{ product[4] }}
+        </p>
 
-                <div class="price-cart">
+        <div class="price-cart">
 
-                    <span class="product-price">
-                        ₹699
-                    </span>
+            <span class="product-price">
+                ₹{{ product[3] }}
+            </span>
 
-                    <div class="product-actions">
+            <div class="product-actions">
 
-                        <button class="wishlist-btn"
-        data-name="Lavender Bliss Candle"
-        data-price="699"
-        data-image="{{ url_for('static', filename='images/candle.jpg') }}"
-        data-category="Scented Candle"
-        data-description="Relaxing handmade soy candle with premium floral fragrance.">
+                <button class="wishlist-btn"
+                        data-name="{{ product[1] }}"
+                        data-price="{{ product[3] }}"
+                        data-image="{{ url_for('static', filename='images/' + product[5]) }}"
+                        data-category="{{ product[2] }}"
+                        data-description="{{ product[4] }}">
 
-    ♡ Wishlist
+                    <span class="heart-icon">🤍</span>
 
-</button>
-                        <button class="cart-btn">
-                            Add To Cart
-                        </button>
+                </button>
 
-                    </div>
+                <a href="/add-to-cart/{{ product[0] }}"
+                   class="cart-btn">
 
-                </div>
+                    🛒 Add To Cart
 
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 2 -->
-
-        <div class="product-card"
-             data-category="paintings">
-
-            <img src="{{ url_for('static', filename='images/painting.jpg') }}">
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    Handmade Painting
-                </span>
-
-                <h3>
-                    Luxury Canvas Art
-                </h3>
-
-                <p>
-                    Elegant handcrafted artwork perfect for aesthetic interiors.
-                </p>
-
-                <div class="price-cart">
-
-                    <span class="product-price">
-                        ₹2499
-                    </span>
-
-                    <div class="product-actions">
-
-                      <button class="wishlist-btn"
-        data-name="Luxury Canvas Art"
-        data-price="2499"
-        data-image="{{ url_for('static', filename='images/painting.jpg') }}"
-        data-category="Handmade Painting"
-        data-description="Elegant handcrafted artwork perfect for aesthetic interiors.">
-
-    ♡ Wishlist
-
-</button>
-                        <button class="cart-btn">
-                            Add To Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 3 -->
-
-        <div class="product-card"
-             data-category="decor">
-
-            <img src="{{ url_for('static', filename='images/decor.jpg') }}">
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    Festival Decor
-                </span>
-
-                <h3>
-                    Celebration Decor Set
-                </h3>
-
-                <p>
-                    Premium handmade festive décor crafted beautifully.
-                </p>
-
-                <div class="price-cart">
-
-                    <span class="product-price">
-                        ₹1599
-                    </span>
-
-                    <div class="product-actions">
-
-                     <button class="wishlist-btn"
-        data-name="Celebration Decor Set"
-        data-price="1599"
-        data-image="{{ url_for('static', filename='images/decor.jpg') }}"
-        data-category="Festival Decor"
-        data-description="Premium handmade festive décor crafted beautifully.">
-
-    ♡ Wishlist
-
-</button>
-                        <button class="cart-btn">
-                            Add To Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 4 -->
-
-        <div class="product-card"
-             data-category="paintings">
-
-            <img src="{{ url_for('static', filename='images/sketch.jpg') }}">
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    Pencil Sketch
-                </span>
-
-                <h3>
-                    Custom Portrait Sketch
-                </h3>
-
-                <p>
-                    Personalized hand-drawn sketch crafted from your memories.
-                </p>
-
-                <div class="price-cart">
-
-                    <span class="product-price">
-                        ₹1299
-                    </span>
-
-                    <div class="product-actions">
-
-                       <button class="wishlist-btn"
-        data-name="Custom Portrait Sketch"
-        data-price="1299"
-        data-image="{{ url_for('static', filename='images/sketch.jpg') }}"
-        data-category="Pencil Sketch"
-        data-description="Personalized hand-drawn sketch crafted from your memories.">
-
-    ♡ Wishlist
-
-</button>
-
-                        <button class="cart-btn">
-                            Add To Cart
-                        </button>
-
-                    </div>
-
-                </div>
+                </a>
 
             </div>
 
@@ -323,21 +178,27 @@
 
     </div>
 
+</div>
+
+{% endfor %}
+
+</div>
 </section>
-
+{% for item in cart_items %}
+<div class="cart-item">
+    <img src="{{ url_for('static', filename='images/' + item[3]) }}"
+         width="120">
+    <h3>{{ item[1] }}</h3>
+    <p>Price: ₹{{ item[2] }}</p>
+    <p>Quantity: {{ item[4] }}</p>
+</div>
+{% endfor %}
 <!-- ================= WHATSAPP BUTTON ================= -->
-
 <a href="https://wa.me/919999999999"
    class="whatsapp-btn">
-
     💬
-
 </a>
-
 <!-- ================= SCRIPT ================= -->
-
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 </body>
-
 </html>

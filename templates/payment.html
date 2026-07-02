@@ -1,0 +1,54 @@
+<h2>Payment Page</h2>
+
+<p>Total Amount: ₹{{ total }}</p>
+
+<button onclick="payNow()">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+async function payNow() {
+
+    const amount = {{ total }} * 100;
+
+    const res = await fetch("/api/create-order", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ amount })
+    });
+
+    const order = await res.json();
+
+    if (!order.order_id) {
+        alert("Order creation failed");
+        return;
+    }
+
+    var options = {
+        key: order.key_id,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.order_id,
+
+        handler: async function (response) {
+
+            const verify = await fetch("/api/verify-payment", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(response)
+            });
+
+            const result = await verify.json();
+
+            if (result.status === "payment_verified") {
+                window.location.href = "/success";
+            } else {
+                alert("Payment failed");
+            }
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
+</script>

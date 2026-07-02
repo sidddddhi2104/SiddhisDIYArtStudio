@@ -1,1 +1,1 @@
-web: gunicorn sidkara.wsgi
+web: gunicorn Sivika.wsgi

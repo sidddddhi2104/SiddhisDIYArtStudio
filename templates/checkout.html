@@ -3,12 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | Siddhi's DIY Art Studio</title>
+    <title>Checkout | Sivika Art Studio</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        .checkout-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 850px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkout-form-card,
+        .order-summary-card {
+            padding: 40px;
+        }
+
+        .checkout-step-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #b88aa0;
+        }
+
+        .checkout-step-label i {
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .checkout-form-card input,
+        .checkout-form-card textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e8d5dd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: rgba(255,255,255,0.7);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .checkout-form-card input:focus,
+        .checkout-form-card textarea:focus {
+            outline: none;
+            border-color: #cf8fad;
+            box-shadow: 0 0 0 3px rgba(207,143,173,0.15);
+        }
+
+        .checkout-form-card textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .order-summary-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #4a2e3a;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 14px;
+        }
+
+        .summary-divider {
+            border: none;
+            border-top: 1px dashed #e3c3d0;
+            margin: 18px 0;
+        }
+
+        .summary-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #4a2e3a;
+            margin-bottom: 28px;
+        }
+
+        .secure-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            color: #8a8a8a;
+            margin-top: 16px;
+            justify-content: center;
+        }
+
+        .pay-now-btn {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pay-now-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 22px;
+            font-size: 22px;
+            color: #c9a3b5;
+        }
+
+    </style>
 </head>
 <body>
+<nav class="navbar">
 
+    <div class="logo">
+        Sivika Studio
+    </div>
+
+    <div class="nav-icons">
+
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+</nav>
 <section class="section-padding">
 
     <div class="section-title">
@@ -16,31 +197,208 @@
         <p>Complete your handmade order beautifully.</p>
     </div>
 
-    <div class="glass-card" style="max-width:800px; margin:auto; padding:50px;">
+    <div class="checkout-wrapper">
 
-        <form method="POST">
+        <!-- ===== LEFT: SHIPPING FORM ===== -->
+        <div class="glass-card checkout-form-card">
 
-            <div class="form-grid">
-
-                <input type="text" name="fullname" placeholder="Full Name" required class="input-field">
-
-                <input type="text" name="phone" placeholder="Phone Number" required class="input-field">
-
+            <div class="checkout-step-label">
+                <i class="fa-solid fa-truck"></i>
+                Shipping Details
             </div>
 
-            <textarea name="address" rows="5" placeholder="Shipping Address" required class="input-field"></textarea>
+            <form method="POST" id="checkoutForm">
 
-            <input type="text" name="total" value="₹699" readonly class="input-field">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
 
-            <button type="submit" class="primary-btn" style="border:none; width:100%;">
-                Place Order
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="10-digit mobile number" required>
+                    </div>
+
+                    <div class="form-group">
+    <label for="total">Order Total</label>
+    <input type="text" id="total" name="total" value="{{ cart_total }}" readonly>
+</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" name="address" placeholder="House no, street, city, pincode" required></textarea>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- ===== RIGHT: ORDER SUMMARY ===== -->
+        <div class="glass-card order-summary-card">
+
+            <h3>Order Summary</h3>
+
+           <div class="summary-row">
+    <span>Item Total</span>
+    <span>₹{{ cart_total }}</span>
+</div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Handling Fee</span>
+                <span>₹0</span>
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="summary-total-row">
+    <span>Total Amount</span>
+    <span>₹{{ cart_total }}</span>
+</div>
+
+            <button onclick="payNow()" class="primary-btn pay-now-btn" id="payBtn">
+                <i class="fa-solid fa-lock"></i>
+                Pay Now
             </button>
 
-        </form>
+            <div class="secure-note">
+                <i class="fa-solid fa-shield-halved"></i>
+                100% Secure Payments via Razorpay
+            </div>
+
+            <div class="trust-badges">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-solid fa-qrcode"></i>
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+        </div>
 
     </div>
 
 </section>
+
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+async function payNow() {
+
+    const fullname = document.getElementById("fullname").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const total = document.getElementById("total").value;
+
+    if (!fullname || !phone || !address) {
+        alert("Please fill in all shipping details before proceeding to payment.");
+        return;
+    }
+
+    const payBtn = document.getElementById("payBtn");
+    payBtn.disabled = true;
+    payBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+
+    const amount = parseInt(total) * 100;
+
+    try {
+
+        const res = await fetch("/api/create-order", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ amount })
+        });
+
+        const order = await res.json();
+
+        if (!order.order_id) {
+            alert("Order creation failed");
+            payBtn.disabled = false;
+            payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay Now';
+            return;
+        }
+
+        var options = {
+            key: order.key_id,
+            amount: order.amount,
+            currency: order.currency,
+            name: "Sivika Store",
+            description: "Checkout Payment",
+            order_id: order.order_id,
+
+            prefill: {
+                name: fullname,
+                contact: phone
+            },
+
+            handler: async function (response) {
+
+                const verify = await fetch("/api/verify-payment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        ...response,        // razorpay_order_id, razorpay_payment_id, razorpay_signature
+                        fullname: fullname,
+                        phone: phone,
+                        address: address,
+                        total: total
+                    })
+                });
+
+                const result = await verify.json();
+
+                console.log("VERIFY RESULT:", result);
+
+                if (result.status === "payment_verified") {
+                    window.location.href = "/success?order_id=" + result.order_id;
+                } else {
+                    alert("Payment verification failed");
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay Now';
+                }
+            },
+
+            modal: {
+                ondismiss: function () {
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay Now';
+                }
+            },
+
+            theme: {
+                color: "#cf8fad"
+            }
+        };
+
+        const rzp = new Razorpay(options);
+
+        rzp.on("payment.failed", function () {
+            alert("Payment Failed");
+            payBtn.disabled = false;
+            payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay Now';
+        });
+
+        rzp.open();
+
+    } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please try again.");
+        payBtn.disabled = false;
+        payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay Now';
+    }
+}
+
+</script>
 </body>
 </html>

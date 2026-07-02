@@ -1,0 +1,10 @@
+<h2>Review Your Order</h2>
+
+<p><b>Name:</b> {{ fullname }}</p>
+<p><b>Phone:</b> {{ phone }}</p>
+<p><b>Address:</b> {{ address }}</p>
+<p><b>Total:</b> ₹{{ total }}</p>
+
+<form action="/payment">
+    <button type="submit">Proceed to Payment</button>
+</form>

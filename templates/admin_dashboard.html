@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Dashboard | Siddhi's DIY Art Studio</title>
+    <title>Admin Dashboard | Sivika Art Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -28,17 +28,12 @@
     <nav class="navbar">
 
         <div class="logo">
-            Siddhi's DIY Art Studio
+            Sivika Studio
         </div>
 
         <ul class="nav-links">
 
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/custom-order">Custom Orders</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/admin">Admin</a></li>
+            <li><a href="/logout">Logout</a></li>
 
         </ul>
 
@@ -62,7 +57,7 @@
         <div class="hero-image">
 
             <img src="{{ url_for('static',
-            filename='images/decor.jpg') }}">
+            filename='images/hero.jpg') }}">
 
         </div>
 
@@ -171,125 +166,13 @@
 
     <!-- QUICK ACTIONS -->
 
-    <section class="section-padding">
-
-        <div class="section-title">
-
-            <h2>Quick Actions</h2>
-
-        </div>
-
-        <div class="category-grid">
-
-            <div class="glass-card"
-                 style="padding:40px; text-align:center;">
-
-                <i class="fas fa-plus-circle"
-                   style="font-size:50px;
-                   color:#d98bb4;
-                   margin-bottom:20px;"></i>
-
-                <h3 style="margin-bottom:20px;">
-                    Add New Product
-                </h3>
-
-                <a href="/admin-products"
-                   class="primary-btn">
-
-                    Add Product
-
-                </a>
-
-            </div>
-
-            <div class="glass-card"
-                 style="padding:40px; text-align:center;">
-
-                <i class="fas fa-shopping-bag"
-                   style="font-size:50px;
-                   color:#d98bb4;
-                   margin-bottom:20px;"></i>
-
-                <h3 style="margin-bottom:20px;">
-                    Manage Orders
-                </h3>
-
-                <a href="/admin-orders"
-                   class="primary-btn">
-
-                    View Orders
-
-                </a>
-
-            </div>
-
-            <div class="glass-card"
-                 style="padding:40px; text-align:center;">
-
-                <i class="fas fa-envelope"
-                   style="font-size:50px;
-                   color:#d98bb4;
-                   margin-bottom:20px;"></i>
-
-                <h3 style="margin-bottom:20px;">
-                    Customer Messages
-                </h3>
-
-                <a href="/admin-contacts"
-                   class="primary-btn">
-
-                    Open Messages
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
+   
     <!-- FOOTER -->
 
     <footer class="footer">
-
-        <div class="footer-content">
-
-            <div>
-
-                <h3>Siddhi's DIY Art Studio</h3>
-
-                <p>
-                    Premium handmade DIY products,
-                    customized gifts and artistic décor creations.
-                </p>
-
-            </div>
-
-            <div>
-
-                <h3>Admin Links</h3>
-
-                <p><a href="/admin-products">Products</a></p>
-                <p><a href="/admin-orders">Orders</a></p>
-                <p><a href="/admin-contacts">Messages</a></p>
-
-            </div>
-
-            <div>
-
-                <h3>Contact</h3>
-
-                <p>Email: siddhidiy@gmail.com</p>
-                <p>Phone: +91 9999999999</p>
-
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-
-            <p>
-                © 2026 Siddhi's DIY Art Studio.
+   
+                       <p>
+                © 2026 Sivika Art Studio.
                 All Rights Reserved.
             </p>
 
@@ -297,14 +180,6 @@
 
     </footer>
 
-    <!-- WHATSAPP BUTTON -->
-
-    <a href="https://wa.me/919999999999"
-       class="whatsapp-btn">
-
-        <i class="fab fa-whatsapp"></i>
-
-    </a>
 
     <!-- JS -->
 

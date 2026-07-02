@@ -1,311 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Cart | Sidkara Studio</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Sivika Studio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
 <nav class="navbar">
-
-    <div class="logo">
-        Sidkara Studio
+    <div class="logo">Sivika Studio</div>
+    <div class="nav-icons">
+        <a href="/" class="nav-icon-btn home-icon"><i class="fa-solid fa-house"></i></a>
+        <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span class="wishlist-count">0</span>
+        </a>
     </div>
-
-    <ul class="nav-links">
-
-        <li><a href="/">Home</a></li>
-
-        <li><a href="/products">Products</a></li>
-
-        <li><a href="/wishlist">Wishlist</a></li>
-
-    </ul>
-
 </nav>
-
-<!-- ================= CART ================= -->
 
 <section class="section-padding">
 
     <div class="section-title">
-
         <h2>Your Shopping Cart 🛒</h2>
-
-        <p>
-            Handmade luxury products selected by you.
-        </p>
-
+        <p>Handmade luxury products selected by you.</p>
     </div>
 
     <div id="cartContainer">
+
+        {% if not cart_items %}
+
+            <div class="glass-card" style="padding:60px; text-align:center;">
+                <h2 style="color:#c97ca5; margin-bottom:20px;">Your Cart is Empty 🛒</h2>
+                <p style="color:#777;">Add beautiful handmade products.</p>
+            </div>
+
+        {% else %}
+
+            {% for item in cart_items %}
+
+            <div class="glass-card" style="display:flex; gap:30px; align-items:center; padding:30px; margin-bottom:30px;">
+
+                <img src="{{ url_for('static', filename='images/' + item[5]) }}"
+                     style="width:180px; height:180px; object-fit:cover; border-radius:25px;">
+
+                <div style="flex:1;">
+
+                    <span class="product-category">{{ item[3] }}</span>
+                    <h2 style="margin:10px 0; color:#6f4a61;">{{ item[2] }}</h2>
+                    <p style="color:#777; margin-bottom:15px;">{{ item[6] }}</p>
+                    <h3 style="color:#c97ca5;">₹{{ item[4] }}</h3>
+
+                    <div style="display:flex; align-items:center; gap:15px; margin-top:20px;">
+                        <a href="/update-cart-qty/{{ item[0] }}/decrease" class="qty-btn">-</a>
+                        <span style="font-size:20px; font-weight:600;">{{ item[7] }}</span>
+                        <a href="/update-cart-qty/{{ item[0] }}/increase" class="qty-btn">+</a>
+                    </div>
+
+                </div>
+
+                <a href="/remove-from-cart/{{ item[0] }}"
+                   style="background:#ffd6e7; border:none; padding:14px 22px; border-radius:30px; cursor:pointer; color:#a44d75; font-weight:600; text-decoration:none;">
+                    Remove
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+            <div class="glass-card" style="padding:40px; text-align:right;">
+                <h2 style="margin-bottom:25px; color:#6f4a61;">Total: ₹{{ cart_total }}</h2>
+                <a href="/checkout" class="primary-btn">Proceed To Checkout</a>
+            </div>
+
+        {% endif %}
 
     </div>
 
 </section>
 
-<!-- ================= SCRIPT ================= -->
-
-<script>
-
-const cartContainer =
-document.getElementById("cartContainer");
-
-let cart =
-JSON.parse(localStorage.getItem("cart"))
-|| [];
-
-function renderCart(){
-
-    cartContainer.innerHTML = "";
-
-    // EMPTY CART
-
-    if(cart.length === 0){
-
-        cartContainer.innerHTML = `
-
-            <div class="glass-card"
-                 style="
-                    padding:60px;
-                    text-align:center;
-                 ">
-
-                <h2 style="
-                    color:#c97ca5;
-                    margin-bottom:20px;
-                ">
-                    Your Cart is Empty 🛒
-                </h2>
-
-                <p style="
-                    color:#777;
-                ">
-                    Add beautiful handmade products.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-    let total = 0;
-
-    cart.forEach((product,index) => {
-
-        total += product.price * product.quantity;
-
-        cartContainer.innerHTML += `
-
-        <div class="glass-card"
-             style="
-                display:flex;
-                gap:30px;
-                align-items:center;
-                padding:30px;
-                margin-bottom:30px;
-             ">
-
-            <img src="${product.image}"
-                 style="
-                    width:180px;
-                    height:180px;
-                    object-fit:cover;
-                    border-radius:25px;
-                 ">
-
-            <div style="flex:1;">
-
-                <span class="product-category">
-
-                    ${product.category}
-
-                </span>
-
-                <h2 style="
-                    margin:10px 0;
-                    color:#6f4a61;
-                ">
-
-                    ${product.name}
-
-                </h2>
-
-                <p style="
-                    color:#777;
-                    margin-bottom:15px;
-                ">
-
-                    ${product.description}
-
-                </p>
-
-                <h3 style="
-                    color:#c97ca5;
-                ">
-
-                    ₹${product.price}
-
-                </h3>
-
-                <div style="
-                    display:flex;
-                    align-items:center;
-                    gap:15px;
-                    margin-top:20px;
-                ">
-
-                    <button onclick="decreaseQty(${index})"
-                            class="qty-btn">
-
-                        -
-
-                    </button>
-
-                    <span style="
-                        font-size:20px;
-                        font-weight:600;
-                    ">
-
-                        ${product.quantity}
-
-                    </span>
-
-                    <button onclick="increaseQty(${index})"
-                            class="qty-btn">
-
-                        +
-
-                    </button>
-
-                </div>
-
-            </div>
-
-            <button onclick="removeCart(${index})"
-                    style="
-                        background:#ffd6e7;
-                        border:none;
-                        padding:14px 22px;
-                        border-radius:30px;
-                        cursor:pointer;
-                        color:#a44d75;
-                        font-weight:600;
-                    ">
-
-                Remove
-
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-    // TOTAL
-
-    cartContainer.innerHTML += `
-
-        <div class="glass-card"
-             style="
-                padding:40px;
-                text-align:right;
-             ">
-
-            <h2 style="
-                margin-bottom:25px;
-                color:#6f4a61;
-            ">
-
-                Total: ₹${total}
-
-            </h2>
-
-            <a href="/checkout"
-               class="primary-btn">
-
-                Proceed To Checkout
-
-            </a>
-
-        </div>
-
-    `;
-
-}
-
-// REMOVE
-
-function removeCart(index){
-
-    cart.splice(index,1);
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    renderCart();
-
-}
-
-// INCREASE
-
-function increaseQty(index){
-
-    cart[index].quantity++;
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    renderCart();
-
-}
-
-// DECREASE
-
-function decreaseQty(index){
-
-    if(cart[index].quantity > 1){
-
-        cart[index].quantity--;
-
-    }
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-    renderCart();
-
-}
-
-// INITIAL LOAD
-
-renderCart();
-
-</script>
-
 </body>
-
 </html>

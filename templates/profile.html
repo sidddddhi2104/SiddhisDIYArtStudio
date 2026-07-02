@@ -3,33 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Sivika Art Studio</title>
 
-    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        .profile-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 32px 36px;
+            margin-bottom: 28px;
+        }
+
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8b9cd, #cf8fad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .profile-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #4a2e3a;
+            margin-bottom: 4px;
+        }
+
+        .profile-header p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: #8a8a8a;
+        }
+
+        .profile-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+        }
+
+        .profile-tab-btn {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: 1px solid #e8d5dd;
+            background: rgba(255,255,255,0.6);
+            color: #7a4a5d;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .profile-tab-btn:hover,
+        .profile-tab-btn.active {
+            background: #cf8fad;
+            color: #fff;
+            border-color: #cf8fad;
+        }
+
+        .profile-section {
+            padding: 36px;
+            margin-bottom: 28px;
+            scroll-margin-top: 100px;
+        }
+
+        .profile-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #4a2e3a;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-section h3 i {
+            color: #cf8fad;
+            font-size: 20px;
+        }
+
+        /* ---- Account section ---- */
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .account-field label {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8a8a8a;
+            margin-bottom: 6px;
+        }
+
+        .account-field .value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: #4a2e3a;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #e8d5dd;
+            border-radius: 10px;
+        }
+
+        /* ---- Orders / Payments ---- */
+
+        .order-card {
+            border: 1px solid #e8d5dd;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            background: rgba(255,255,255,0.6);
+        }
+
+        .order-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .order-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #e3c3d0;
+        }
+
+        .order-id {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #4a2e3a;
+        }
+
+        .order-status {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            background: #fdf2f6;
+            color: #cf8fad;
+        }
+
+        .order-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .order-detail-grid .label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #8a8a8a;
+            margin-bottom: 4px;
+        }
+
+        .order-detail-grid .val {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a2e3a;
+        }
+
+        .order-card-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .invoice-link {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #cf8fad;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .invoice-link:hover {
+            text-decoration: underline;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 10px;
+            font-family: 'Poppins', sans-serif;
+            color: #8a8a8a;
+            font-size: 14px;
+        }
+
+        .empty-state i {
+            display: block;
+            font-size: 32px;
+            color: #e3c3d0;
+            margin-bottom: 12px;
+        }
+
+    </style>
 </head>
 <body>
+<nav class="navbar">
+    <div class="logo">Sivika Studio</div>
+    <div class="nav-icons">
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
+    </div>
+</nav>
 
 <section class="section-padding">
 
-    <div class="glass-card" style="max-width:700px; margin:auto; padding:50px; text-align:center;">
+    <div class="profile-wrapper">
 
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width:120px; margin:auto; margin-bottom:20px;">
+        <div class="glass-card profile-header">
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+                <h2>Hi, {{ user.name if user else 'Guest' }}</h2>
+                <p>{{ user.email if user else '' }}</p>
+            </div>
+        </div>
 
-        <h2>{{ session.username }}</h2>
+       
 
-        <p style="margin-top:10px;">
-            Welcome to your artistic shopping profile.
-        </p>
+        <!-- ===== MY ACCOUNT ===== -->
+       <!-- ===== MY ACCOUNT ===== -->
+<div id="account" class="glass-card profile-section">
 
-        <div style="margin-top:30px;">
-            <a href="/orders" class="primary-btn">View Orders</a>
-            <a href="/logout" class="secondary-btn">Logout</a>
+    <div class="section-header-row">
+        <h3><i class="fa-solid fa-id-card"></i> Account Details</h3>
+        <button type="button" class="edit-btn" id="editAccountBtn">
+            <i class="fa-solid fa-pen"></i> Edit
+        </button>
+    </div>
+
+    <form id="accountForm" method="POST" action="{{ url_for('update_account') }}">
+
+        <div class="account-grid">
+            <div class="account-field">
+                <label>Full Name</label>
+                <input type="text" name="name" value="{{ user.name if user else '' }}" disabled>
+            </div>
+            <div class="account-field">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ user.email if user else '' }}" disabled>
+            </div>
+            <div class="account-field">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" value="{{ user.phone if user else '' }}" disabled>
+            </div>
+            <div class="account-field">
+                <label>Address</label>
+                <input type="text" name="address" value="{{ user.address if user else '' }}" disabled>
+            </div>
+        </div>
+
+        <div class="account-form-actions" id="accountFormActions">
+            <button type="button" class="cancel-btn" id="cancelAccountBtn">Cancel</button>
+            <button type="submit" class="save-btn">Save Changes</button>
+        </div>
+
+    </form>
+
+</div>
+
+        <!-- ===== MY ORDERS ===== -->
+        <div id="orders" class="glass-card profile-section">
+            <h3><i class="fa-solid fa-box"></i> My Orders</h3>
+
+            {% if orders %}
+                {% for order in orders %}
+                <div class="order-card">
+
+                    <div class="order-card-top">
+                        <span class="order-id">{{ order.invoice_no }}</span>
+                        <span class="order-status">{{ order.status if order.status else 'Confirmed' }}</span>
+                    </div>
+
+                    <div class="order-detail-grid">
+                        <div>
+                            <div class="label">Order Date</div>
+                            <div class="val">{{ order.order_date }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Delivery Date</div>
+                            <div class="val">{{ order.delivery_date }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Amount</div>
+                            <div class="val">₹{{ order.total }}</div>
+                        </div>
+                    </div>
+
+                    <div class="order-card-actions">
+                        <a href="{{ url_for('download_invoice', order_id=order.invoice_no) }}" class="invoice-link">
+                            <i class="fa-solid fa-file-arrow-down"></i> Download Invoice
+                        </a>
+                    </div>
+
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <i class="fa-solid fa-box-open"></i>
+                    You haven't placed any orders yet.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- ===== PAYMENTS ===== -->
+        <div id="payments" class="glass-card profile-section">
+            <h3><i class="fa-solid fa-credit-card"></i> Payment History</h3>
+
+            {% if orders %}
+                {% for order in orders %}
+                <div class="order-card">
+
+                    <div class="order-card-top">
+                        <span class="order-id">{{ order.payment_id }}</span>
+                        <span class="order-status">Paid</span>
+                    </div>
+
+                    <div class="order-detail-grid">
+                        <div>
+                            <div class="label">Order ID</div>
+                            <div class="val">{{ order.invoice_no }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Date</div>
+                            <div class="val">{{ order.order_date }}</div>
+                        </div>
+                        <div>
+                            <div class="label">Amount Paid</div>
+                            <div class="val">₹{{ order.total }}</div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <i class="fa-solid fa-receipt"></i>
+                    No payment records yet.
+                </div>
+            {% endif %}
         </div>
 
     </div>
 
 </section>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+    const editBtn = document.getElementById('editAccountBtn');
+    const cancelBtn = document.getElementById('cancelAccountBtn');
+    const formActions = document.getElementById('accountFormActions');
+    const accountForm = document.getElementById('accountForm');
+    const accountInputs = accountForm.querySelectorAll('input');
+
+    let originalValues = [];
+
+    function enterEditMode() {
+        originalValues = Array.from(accountInputs).map(input => input.value);
+        accountInputs.forEach(input => input.disabled = false);
+        accountInputs[0].focus();
+        formActions.classList.add('show');
+        editBtn.style.display = 'none';
+    }
+
+    function exitEditMode(restore) {
+        if (restore) {
+            accountInputs.forEach((input, i) => input.value = originalValues[i]);
+        }
+        accountInputs.forEach(input => input.disabled = true);
+        formActions.classList.remove('show');
+        editBtn.style.display = 'inline-flex';
+    }
+
+    editBtn.addEventListener('click', enterEditMode);
+    cancelBtn.addEventListener('click', () => exitEditMode(true));
+</script>
 </body>
 </html>

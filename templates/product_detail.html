@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>{{ product[1] }} | Siddhi's DIY Art Studio</title>
+    <title>{{ product[1] }} | Sivika Art Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -24,19 +24,29 @@
 
     <nav class="navbar">
 
-        <div class="logo">
-            Siddhi's DIY Art Studio
-        </div>
+    <div class="logo">
+        Sivika Studio
+    </div>
 
-        <ul class="nav-links">
+    <div class="nav-icons">
 
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/cart">Cart</a></li>
+        <a href="/" class="nav-icon-btn home-icon">
+            <i class="fa-solid fa-house"></i>
+        </a>
 
-        </ul>
+        <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span class="wishlist-count">0</span>
+        </a>
 
-    </nav>
+        <a href="/cart" class="nav-icon-btn cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </a>
+
+    </div>
+
+</nav>
 
     <!-- PRODUCT DETAILS -->
 

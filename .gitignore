@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+
+# Local files
+Host.txt
+
+# Generated files
+Sivika_Test_Cases.xlsx

@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Products | Siddhi's DIY Art Studio</title>
+    <title>Admin Products | Sivika Art Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -25,7 +25,7 @@
     <nav class="navbar">
 
         <div class="logo">
-            Siddhi's DIY Art Studio
+            Sivika Art Studio
         </div>
 
         <ul class="nav-links">
@@ -121,12 +121,26 @@
                         ₹{{ product[3] }}
                     </p>
 
-                    <a href="/delete-product/{{ product[0] }}"
-                       class="secondary-btn">
+                   <div style="display:flex;
+            gap:10px;
+            justify-content:center;">
 
-                        Delete Product
+    <a href="/edit-product/{{ product[0] }}"
+       class="primary-btn">
 
-                    </a>
+        Edit
+
+    </a>
+
+    <a href="/delete-product/{{ product[0] }}"
+       class="secondary-btn"
+       onclick="return confirm('Delete this product?')">
+
+        Delete
+
+    </a>
+
+</div>
 
                 </div>
 

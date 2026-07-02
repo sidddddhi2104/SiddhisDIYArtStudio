@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Orders | Siddhi's DIY Art Studio</title>
+    <title>Admin Orders | Sivika Art Studio</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -25,7 +25,7 @@
     <nav class="navbar">
 
         <div class="logo">
-            Siddhi's DIY Art Studio
+            Sivika Art Studio
         </div>
 
         <ul class="nav-links">
@@ -53,34 +53,33 @@
         <div class="glass-card"
              style="padding:40px; overflow-x:auto;">
 
-            <table width="100%"
-                   cellpadding="20">
+            <table width="100%" cellpadding="20">
 
-                <tr style="background:#fce7f3;">
+    <tr style="background:#fce7f3;">
+        <th>Invoice No</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Order Date</th>
+        <th>Delivery Date</th>
+    </tr>
 
-                    <th>Order ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Total</th>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.invoice_no }}</td>
+        <td>{{ order.fullname }}</td>
+        <td>{{ order.phone }}</td>
+        <td>{{ order.address }}</td>
+        <td>₹{{ order.total }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.order_date }}</td>
+        <td>{{ order.delivery_date }}</td>
+    </tr>
+    {% endfor %}
 
-                </tr>
-
-                {% for order in orders %}
-
-                <tr>
-
-                    <td>{{ order[0] }}</td>
-                    <td>{{ order[1] }}</td>
-                    <td>{{ order[2] }}</td>
-                    <td>{{ order[3] }}</td>
-                    <td>₹{{ order[4] }}</td>
-
-                </tr>
-
-                {% endfor %}
-
-            </table>
+</table>
 
         </div>
 

@@ -2,227 +2,110 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivika Art Studio</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <title>Sikara Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- CSS -->
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
-
-    <!-- GOOGLE FONTS -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <!-- AOS ANIMATION -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet"
-          href="https://unpkg.com/aos@next/dist/aos.css" />
-
-    <!-- ICONS -->
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- FONT AWESOME -->
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- Floating Sparkles -->
+    <div class="sparkles"></div>
 
-    <nav class="navbar">
-
-        <div class="logo">
-            Sikara Studio
-        </div>
-
-        <ul class="nav-links">
-
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Collections</a></li>
-            <li><a href="/custom-order">Custom Orders</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-
-      <div class="nav-icons">
-
-    <a href="/wishlist"
-       class="nav-icon-btn">
-
-        <i class="fa-regular fa-heart"></i>
-
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/917900060933" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
-    <a href="/cart"
-       class="nav-icon-btn cart-icon">
+    <!-- Navbar -->
+    <header>
 
-        <i class="fa-solid fa-bag-shopping"></i>
+        <nav class="navbar">
 
-        <span class="cart-count">
-            0
-        </span>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                    >
 
+                <span>Sivika Art Studio</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/custom-order">Custom Orders</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+
+                <a href="/cart" class="nav-icon-btn cart-icon">
+
+    <i class="fa-solid fa-cart-shopping"></i>
+
+    <span class="cart-count">0</span>
+
+</a>
+
+    <a href="/wishlist" class="nav-icon-btn wishlist-icon">
+    <i class="fa-regular fa-heart"></i>
+    <span class="wishlist-count">0</span>
+</a>
+<div class="nav-icon-btn profile-dropdown">
+    <a href="#" class="profile-toggle">
+        <i class="fa-solid fa-user"></i>
     </a>
-
+    <div class="profile-menu">
+        <p class="profile-name">Hi, {{ session['user_name'] }}</p>
+        <a href="/profile">My Account</a>
+        <a href="/logout">Logout</a>
+    </div>
 </div>
+            </div>
 
-    </nav>
+        </nav>
 
-    <!-- HERO SECTION -->
+    </header>
 
-    <section class="hero" id="home">
+    <!-- Hero Section -->
+    <section class="hero">
 
-        <div class="hero-content"
-             data-aos="fade-right"
-             data-aos-duration="1200">
+        <div class="hero-content">
 
-            <span class="hero-tag">
-                ✨ Luxury Handmade Collection
-            </span>
+            <div class="hero-tag">
+                ✨ Handmade Luxury Creations
+            </div>
 
             <h1>
-
-                Elegant Handmade
-                Art Creations
-                Crafted With Love
-
+                Elegant Handmade Creations Crafted With Love
             </h1>
 
             <p>
-
-                Discover luxurious handmade paintings,
-                customized gifts, scented candles,
-                resin decor, artistic sketches,
-                festival decorations and aesthetic
-                feminine creations made specially for you.
-
+                Discover luxurious DIY art, handmade candles,
+                aesthetic décor, personalized gifts and premium
+                artistic creations.
             </p>
 
             <div class="hero-buttons">
 
-                <a href="/register"
-                   class="primary-btn">
-
-                    Start Shopping
-
+                <a href="/products" class="primary-btn">
+                    Shop Collection
                 </a>
 
-               
-            </div>
-
-        </div>
-
-        <div class="hero-image"
-             data-aos="zoom-in"
-             data-aos-duration="1400">
-
-            <img src="{{ url_for('static',
-            filename='images/hero.jpg') }}">
-
-        </div>
-
-    </section>
-
-    <!-- COLLECTIONS -->
-
-    <section class="section-padding">
-
-        <div class="section-title"
-             data-aos="fade-up">
-
-            <h2>Handmade Collections</h2>
-
-            <p>
-                Explore our premium artistic handmade products
-            </p>
-
-        </div>
-
-        <div class="category-grid">
-
-            <!-- CARD 1 -->
-
-            <div class="category-card"
-                 data-aos="fade-up"
-                 data-aos-delay="100">
-
-                <img src="{{ url_for('static',
-                filename='images/painting.jpg') }}">
-
-                <div class="glass-card">
-
-                    <h3>Handmade Paintings</h3>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 2 -->
-
-            <div class="category-card"
-                 data-aos="fade-up"
-                 data-aos-delay="200">
-
-                <img src="{{ url_for('static',
-                filename='images/sketch.jpg') }}">
-
-                <div class="glass-card">
-
-                    <h3>Pencil Sketches</h3>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 3 -->
-
-            <div class="category-card"
-                 data-aos="fade-up"
-                 data-aos-delay="300">
-
-                <img src="{{ url_for('static',
-                filename='images/candle.jpg') }}">
-
-                <div class="glass-card">
-
-                    <h3>Scented Candles</h3>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 4 -->
-
-            <div class="category-card"
-                 data-aos="fade-up"
-                 data-aos-delay="400">
-
-                <img src="{{ url_for('static',
-                filename='images/decor.jpg') }}">
-
-                <div class="glass-card">
-
-                    <h3>Festival Decor</h3>
-
-                </div>
+                <a href="/custom-order" class="secondary-btn">
+                    Custom Order
+                </a>
 
             </div>
 
@@ -230,293 +113,70 @@
 
     </section>
 
-    <!-- ABOUT STUDIO -->
+    <!-- Footer -->
+    <footer>
 
-    <section class="about-section">
+        <div class="footer-container">
 
-        <div class="about-image"
-             data-aos="fade-right">
+            <div class="footer-about">
 
-            <img src="{{ url_for('static',
-            filename='images/product1.jpg') }}">
-
-        </div>
-
-        <div class="about-content"
-             data-aos="fade-left">
-
-            <span class="hero-tag">
-                About Our Studio
-            </span>
-
-            <h2>
-
-                Where Creativity
-                Meets Elegance
-
-            </h2>
-
-            <p>
-
-                Sikara Studio is a luxury
-                handmade brand focused on aesthetic,
-                feminine and artistic creations.
-                Every product is crafted with passion,
-                creativity and premium finishing.
-
-            </p>
-
-            <a href="/about"
-               class="primary-btn">
-
-                Explore More
-
-            </a>
-
-        </div>
-
-    </section>
-
-    <!-- CUSTOMER REVIEWS -->
-
-    <section class="section-padding reviews-section">
-
-        <div class="section-title"
-             data-aos="fade-up">
-
-            <h2>Customer Reviews</h2>
-
-            <p>
-                Loved by our happy customers
-            </p>
-
-        </div>
-
-        <div class="category-grid">
-
-            <div class="testimonial-card"
-                 data-aos="fade-up">
-
-                <div class="stars">
-
-                    ★★★★★
-
-                </div>
+                <h3>Sivika Art Studio</h3>
 
                 <p>
-
-                    Absolutely loved the handmade
-                    candles and customized gift hamper.
-                    Premium quality and aesthetic packaging.
-
-                </p>
-
-                <h4>
-                    — Priya Sharma
-                </h4>
-
-            </div>
-
-            <div class="testimonial-card"
-                 data-aos="fade-up"
-                 data-aos-delay="150">
-
-                <div class="stars">
-
-                    ★★★★★
-
-                </div>
-
-                <p>
-
-                    The pencil sketch portrait was
-                    extremely beautiful and detailed.
-                    Highly recommended.
-
-                </p>
-
-                <h4>
-                    — Riya Patel
-                </h4>
-
-            </div>
-
-            <div class="testimonial-card"
-                 data-aos="fade-up"
-                 data-aos-delay="300">
-
-                <div class="stars">
-
-                    ★★★★★
-
-                </div>
-
-                <p>
-
-                    Best handmade DIY store.
-                    Elegant products and excellent service.
-
-                </p>
-
-                <h4>
-                    — Sneha Verma
-                </h4>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- INSTAGRAM GALLERY -->
-
-    <section class="section-padding">
-
-        <div class="section-title"
-             data-aos="fade-up">
-
-            <h2>Instagram Gallery</h2>
-
-            <p>
-                Follow our artistic handmade journey
-            </p>
-
-        </div>
-
-        <div class="instagram-grid">
-
-            <img src="{{ url_for('static',
-            filename='images/instagram/insta1.jpg') }}"
-                 data-aos="zoom-in">
-
-            <img src="{{ url_for('static',
-            filename='images/instagram/insta2.jpg') }}"
-                 data-aos="zoom-in"
-                 data-aos-delay="100">
-
-            <img src="{{ url_for('static',
-            filename='images/instagram/insta3.jpg') }}"
-                 data-aos="zoom-in"
-                 data-aos-delay="200">
-
-            <img src="{{ url_for('static',
-            filename='images/instagram/insta4.jpg') }}"
-                 data-aos="zoom-in"
-                 data-aos-delay="300">
-
-        </div>
-
-    </section>
-
-    <!-- CUSTOM ORDER CTA -->
-
-    <section class="cta-section">
-
-        <div class="cta-content"
-             data-aos="zoom-in">
-
-            <h2>
-
-                Want Personalized
-                Handmade Products?
-
-            </h2>
-
-            <p>
-
-                Upload your custom ideas and let us
-                create magical handmade gifts specially for you.
-
-            </p>
-
-            <a href="/custom-order"
-               class="primary-btn">
-
-                Place Custom Order
-
-            </a>
-
-        </div>
-
-    </section>
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-
-        <div class="footer-content">
-
-            <div>
-
-                <h3>Sikara Studio</h3>
-
-                <p>
-
-                    Luxury handmade creations,
-                    customized gifts and artistic decor products.
-
+                    Handmade luxury creations crafted artistically
+                    with love and creativity.
                 </p>
 
             </div>
 
-            <div>
+            <div class="footer-links">
 
-                <h3>Quick Links</h3>
+                <h4>Quick Links</h4>
 
-                <p><a href="/">Home</a></p>
-                <p><a href="/products">Products</a></p>
-                <p><a href="/contact">Contact</a></p>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/custom-order">Custom Orders</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
 
             </div>
 
-            <div>
+            <div class="footer-social">
 
-                <h3>Contact</h3>
+                <h4>Follow Us</h4>
 
-                <p>Email: sikarastudio@gmail.com</p>
+                <div class="social-icons">
 
-                <p>Phone: +91 9999999999</p>
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-pinterest"></i>
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
 
         <div class="footer-bottom">
-
-            © 2026 Sikara Studio.
-            All Rights Reserved.
-
+            <p>
+                © 2026 Sivika Art Studio | All Rights Reserved
+            </p>
         </div>
 
     </footer>
 
-    <!-- WHATSAPP BUTTON -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <a href="https://wa.me/917900060933"
-       class="whatsapp-btn">
-
-        <i data-lucide="message-circle"></i>
-
-    </a>
-
-    <!-- AOS SCRIPT -->
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-    <script>
-
-        AOS.init({
-
-            offset:120,
-            duration:900,
-            easing:'ease-in-out',
-            once:true
-
-        });
-
-        lucide.createIcons();
-
-    </script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script></body>
+</body>
 
 </html>
