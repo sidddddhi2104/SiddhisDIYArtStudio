@@ -69,9 +69,12 @@ def check_connection(conn, redirect_url='/'):
 # ================= HOME =================
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('welcome.html')
 
 # ================= WISHLIST PAGE =================
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 @app.route('/wishlist')
 def wishlist():
